@@ -1,0 +1,31 @@
+#!/bin/env bash
+#__________________________                           
+#                                                     
+# Nome Script: UpaNaHeroku                            
+# Criador: Lord X                                     
+# Data: 24/06/2079                                    
+# Version= Alpha-1.0                                  
+#___________________________
+
+
+#__________Instalar Heroku___________#
+
+if [ '/bin/node' ]
+then
+    apt update
+    apt install git
+    npm i -g npm@6 && npm i heroku -g
+
+else
+    apt update # Atualiza repositório
+    apt install git # instala o git
+    pkg install nodejs -y #instala nodejs pra usar o npm caso não tenha
+    npm i -g npm@6 && npm i heroku -g # Instala de fato a Heroku no Termux
+fi
+
+dialog --title "Processo de instalação..." --infobox "Instalação Completa, você será redirecionado autimaticamente para o login com o mesmo email e senha do site em 10segundos" 10 20; sleep 15; clear 
+
+
+heroku login -i
+
+

@@ -1,0 +1,32 @@
+#!/bin/env bash
+#__________________________
+#
+# Nome Script: UpaNaHeroku
+# Criador: Lord X
+# Data: 24/06/2079
+# Version= Alpha-1.0
+#___________________________
+
+echo "agora você irá logar na sua conta, mas antes de confirmar\n faça o login no seu navegador,\n caso esqueça dá pra fazer na hora"
+heroku login
+
+dialog --title "Prcesso de Upload" --msgbox "Antes de qualquer coisa, preciso informar que é necessário ter os arquivos [Requirements.tx] e o [Procfile](sim esse sem extenção), caso contrário na hora de upar vai dá errado no 1° você coloca as libs que seu codigo precisa pra rodar e no Procfile o coma do de execução, so saber mais... do Dynos ensina como criar esse corretamente" 10 30
+
+
+read -p "Caminho da pasta do projeto: " pasta
+cd $pasta
+
+rm -rf .git
+git init
+
+clear
+
+read -p "Nome do app na heroku: " app
+heroku git:remote -a $app
+git add .
+
+read -p "Nome/n° da versão que vai dá: " vrs
+git commit -am $vrs
+
+dialog --title "Processo de Uploade" --msgbox "Quase la, agora é só upar tudo e dará certo, caso dê algum erro provavelmente vc esqueceu o arquivo Requirement.txt e/ou o Procfile no primeiro vão as libs e no segundo o comando exato que roda, qualquer coisa vai na documentação do Dynos que ensina a resolver(é bem símples mesmo)" 10 25
+git push heroku master
